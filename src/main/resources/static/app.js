@@ -2,8 +2,8 @@ var stompClient = null;
 var username = null;
 
 function generateRandomUsername() {
-    var adjectives = ["Quick", "Lazy", "Happy", "Sad", "Angry"];
-    var nouns = ["Fox", "Dog", "Cat", "Mouse", "Bear"];
+    var adjectives = ["Quick", "Lazy", "Happy", "Sad", "Angry",  "Brave", "Clever", "Silly", "Shy", "Friendly"];
+    var nouns = ["Fox", "Dog", "Cat", "Mouse", "Bear", "Rabbit", "Lion", "Tiger", "Wolf", "Panda"];
     var adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
     var noun = nouns[Math.floor(Math.random() * nouns.length)];
     return adjective + noun + Math.floor(Math.random() * 1000);
@@ -30,6 +30,14 @@ function sendMessage() {
 function showMessage(message) {
     var messagesDiv = document.getElementById('messages');
     var messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+
+    if (message.username === username) {
+        messageElement.classList.add('own-message');
+    } else {
+        messageElement.classList.add('other-message');
+    }
+
     messageElement.appendChild(document.createTextNode(message.username + ": " + message.content));
     messagesDiv.appendChild(messageElement);
 }
